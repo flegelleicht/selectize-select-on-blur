@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Wiederlist</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.default.min.css" integrity="sha256-ibvTNlNAB4VMqE5uFlnBME6hlparj5sEr1ovZ3B/bNA=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js" integrity="sha256-412FxT7SHXk39AYYNe8+6YGQAhZhlKhthDw2Z3qp/B0=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="control-group">
+    <label for="input-tags">Tags:</label>
+  	<input type="text" id="input-tags" class="demo-default" value="awesome,neat">
+  </div>
+  <script>
+    $('#input-tags').selectize({
+      persist: false,
+      createOnBlur: true,
+      create: true});
+  </script>
+  
+  
+  <button id="button">Select the first result</button>
+  
+    
+    let s = document.createElement('input');
+    s.type = 'text';
+    s.id = 'input'
+    document.body.appendChild(s);
+    let input_field = $(s).selectize({
+      options: [
+        {text: "AABBBC", value:3},
+        {text: "AACCBB", value:2},
+        {text: "AACBCB", value:1},
+        {text: "BBAABC", value:4},
+        {text: "BBCABC", value:5},
+        {text: "CCBABA", value:6},
+      ],
+      mode: 'single',
+      onBlur: () => {
+        let selects = $('.option');
+        if (selects.length > 0) {
+          const id = selects[0].dataset.value;
+          s.selectize.addItem(id);
+        }
+      }
+    });
+    
+    input_field.on('dropdown_close', () => {
+      let selects = $('.option');
+      if (selects.length > 0) {
+        console.error(`selects.length: ${selects.length}`);
+        console.error(selects);
+        const id = selects[selects.length - 1].dataset.value;
+        console.error(`id: ${id}`);
+        s.selectize.addItem(id);
+      }
+    });
+    
+    document.getElementById('button').addEventListener('click', () => {
+      let selects = $('.option');
+      if (selects.length > 0) {
+        console.log(`selects.length: ${selects.length}`);
+        console.log(selects);
+        const id = selects[0].dataset.value;
+        console.log(`id: ${id}`);
+        s.selectize.addItem(id);
+      }
+    });
+  </script>
+</body>
+</html>
