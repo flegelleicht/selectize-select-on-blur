@@ -25,6 +25,65 @@
   
   <button id="button">Select the first result</button>
   
+  <script>
+    // Selectize.define('noclear', function(options) {
+    //   var self = this;
+    //   this.onBlur = (function(e, dest) {
+    //     var original = self.onBlur;
+    //     return function() {
+    //       var self = this;
+    //       if (!self.isFocused) return;
+    //       self.isFocused = false;
+    //
+    //       if (self.ignoreFocus) {
+    //         return;
+    //       } else if (!self.ignoreBlur && document.activeElement === self.$dropdown_content[0]) {
+    //         // necessary to prevent IE closing the dropdown when the scrollbar is clicked
+    //         self.ignoreBlur = true;
+    //         self.onFocus(e);
+    //         return;
+    //       }
+    //
+    //       var deactivate = function() {
+    //         self.close();
+    //
+    //
+    //         let selects = $('.option');
+    //         if(selects.length > 0) {
+    //           console.error(`select.length: ${selects.length}`)
+    //           const fake_evt = {
+    //             type: { toLowerCase: () => 'mousedown'},
+    //             preventDefault: () => {},
+    //           }
+    //           self.isCtrlDown = true;
+    //           self.addItem(1);
+    //         } else {
+    //           console.error(`select.length: ${selects.length}`)
+    //         }
+    //
+    //         // IE11 bug: element still marked as active
+    //         dest && dest.focus && dest.focus();
+    //
+    //         self.isBlurring = false;
+    //         self.ignoreFocus = false;
+    //         self.trigger('blur');
+    //       };
+    //
+    //       self.isBlurring = true;
+    //       self.ignoreFocus = true;
+    //       if (self.settings.create && self.settings.createOnBlur) {
+    //         self.createItem(null, false, deactivate);
+    //       } else {
+    //         deactivate();
+    //       }
+    //
+    //       return null;
+    //
+    //       // do your logic
+    //       // return original.apply(this, arguments);
+    //     };
+    //   })();
+    // });
     
     let s = document.createElement('input');
     s.type = 'text';
@@ -39,6 +98,7 @@
         {text: "BBCABC", value:5},
         {text: "CCBABA", value:6},
       ],
+      // plugins: ['noclear'],
       mode: 'single',
       onBlur: () => {
         let selects = $('.option');
